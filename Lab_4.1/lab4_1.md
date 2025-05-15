@@ -442,23 +442,7 @@ _Figura 18: Interfața modulului Serial_
 
 Următoarea diagramă ilustrează fluxul de date și interacțiunea între diferitele module software:
 
-```
-+---------------+       +-----------------+
-| main.cpp      | <---> | lcd_display.cpp |
-+-------+-------+       +-----------------+
-        |
-        |
-        v
-+-------+-------+       +------------------+
-| keypad_input  | <---> | relay_control.cpp|
-+-------+-------+       +------------------+
-        |
-        |
-        v
-+-------+-------+
-| serial_interface|
-+---------------+
-```
+![module softafe](iamges/9.png)
 
 _Figura 19: Interacțiunea între modulele software_
 
@@ -488,44 +472,7 @@ _Figura 20: Pseudocod pentru logica de control_
 
 Sistemul implementează următoarea mașină de stare:
 
-```
-       +-------------+
-       | Inițializare |
-       +------+------+
-              |
-              v
-       +------+------+
-+----->|  Așteptare   |
-|      +------+------+
-|             |
-|             v
-|      +------+------+     +-------------+
-|      |  Procesare   +---->  Releu ON    |
-|      |   Comandă    |     +------+------+
-|      +------+------+            |
-|             |                    |
-|             v                    |
-|      +------+------+            |
-|      |  Afișare    |<-----------+
-+------+   Status    |
-       +-------------+
-              |
-              v
-       +------+------+     +-------------+
-       |  Procesare   +---->  Releu OFF   |
-       |   Comandă    |     +------+------+
-       +------+------+            |
-              |                    |
-              v                    |
-       +------+------+            |
-       |  Afișare    |<-----------+
-+------+   Status    |
-|      +-------------+
-|             |
-|             v
-+-------------+
-```
-
+![stare](iamges/10.png)
 _Figura 21: Diagrama de stare a sistemului_
 
 ### Implementarea Comenzilor
