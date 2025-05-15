@@ -117,30 +117,7 @@ _Figura 1: Arhitectura generală a sistemului_
 
 Schema bloc de mai jos ilustrează componentele principale ale sistemului și fluxul de date între acestea:
 
-```
-+-----------------+     +-------------------+     +------------------+
-| Interfețe Input |     |                   |     | Interfețe Output |
-| - Serial UART   | --> |    Controller     | --> | - LCD Display    |
-| - Keypad 4x4    |     |  (Microcontroler) |     | - Serial Output  |
-+-----------------+     |                   |     +------------------+
-                        |                   |
-                        +--------+----------+
-                                 |
-                                 v
-                        +------------------+
-                        | Modul Releu      |
-                        | - Control Binar  |
-                        +--------+---------+
-                                 |
-                                 v
-                        +------------------+
-                        | Actuator Binar   |
-                        | - Bec Electric   |
-                        | - Ventilator     |
-                        +------------------+
-```
-
-_Figura 2: Schema bloc funcțională a sistemului_
+![Schema bloc funcțională a sistemului](images/1.png)
 
 ### Schema Electrică
 
