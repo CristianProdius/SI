@@ -109,7 +109,7 @@ Sistemul este structurat pe trei niveluri principale:
    - Controlează direct releul și actuatorul conectat
    - Furnizează feedback despre starea curentă
 
-![Diagrama Bloc a Arhitecturii Sistemului](https://example.com/diagram1.png)
+![Diagrama Bloc a Arhitecturii Sistemului](images/1.png)
 
 _Figura 1: Arhitectura generală a sistemului_
 
@@ -117,13 +117,13 @@ _Figura 1: Arhitectura generală a sistemului_
 
 Schema bloc de mai jos ilustrează componentele principale ale sistemului și fluxul de date între acestea:
 
-![Schema bloc funcțională a sistemului](images/1.png)
+![Schema bloc funcțională a sistemului](images/2.png)
 
 ### Schema Electrică
 
 Schema electrică completă a sistemului include toate conexiunile între microcontroler și periferice:
 
-![Schema Electrică a Sistemului](https://example.com/schema_electrica.png)
+![Schema Electrică a Sistemului](images/3.png)
 
 _Figura 3: Schema electrică a sistemului_
 
@@ -154,18 +154,7 @@ _Figura 3: Schema electrică a sistemului_
 ### Interacțiunea Hardware-Software
 
 Diagrama următoare ilustrează interfața dintre componentele hardware și modulele software:
-
-```
-+---------------------+     +----------------------+
-| Module Hardware     |     | Module Software      |
-+---------------------+     +----------------------+
-| ESP32               | <-> | main.cpp             |
-| LCD Display (I2C)   | <-> | lcd_display.cpp/.h   |
-| Keypad 4x4          | <-> | keypad_input.cpp/.h  |
-| Modul Releu         | <-> | relay_control.cpp/.h |
-| Actuator            | <-> | -                    |
-+---------------------+     +----------------------+
-```
+![Interfața hardware-software](images/4.png)
 
 _Figura 4: Interfața hardware-software_
 
@@ -177,24 +166,7 @@ Fiecare modul software gestionează o componentă hardware specifică, implement
 
 Proiectul este organizat modular, cu separarea clară a funcționalităților în fișiere distincte:
 
-```
-/relay_control_project
-|-- platformio.ini             # Configurare platformio
-|-- src/
-|   |-- main.cpp               # Funcția principală și logica de control
-|   |-- lcd_display.cpp        # Implementarea funcționalităților LCD
-|   |-- lcd_display.h          # Interfața publică pentru modulul LCD
-|   |-- keypad_input.cpp       # Implementarea funcționalităților Keypad
-|   |-- keypad_input.h         # Interfața publică pentru modulul Keypad
-|   |-- relay_control.cpp      # Implementarea controlului releului
-|   |-- relay_control.h        # Interfața publică pentru modulul releu
-|   |-- serial_interface.cpp   # Implementarea interfeței seriale
-|   |-- serial_interface.h     # Interfața publică pentru comunicare serială
-|-- include/                   # Fișiere header globale
-|-- lib/                       # Biblioteci externe
-|-- test/                      # Teste unitare (opțional)
-|-- README.md                  # Documentație de bază
-```
+![Structura fișierelor proiectului](images/5.png)
 
 _Figura 5: Structura fișierelor proiectului_
 
@@ -249,7 +221,7 @@ ESP32 este un microcontroler de performanță cu suport Wi-Fi și Bluetooth, cre
 
 **Rol în proiect:** Unitatea centrală de procesare care coordonează toate componentele și implementează logica de control.
 
-![ESP32 DevKit](https://example.com/esp32_image.png)
+![ESP32 DevKit](images/6.png)
 
 _Figura 6: Microcontroler ESP32 DevKit_
 
@@ -265,10 +237,6 @@ Modulul releu utilizat este un dispozitiv de comutare electromagnetică care per
 - Led indicator pentru starea releului
 
 **Rol în proiect:** Comută circuitul actuatorului (bec electric sau ventilator), permițând controlul prin intermediul microcontrolerului.
-
-![Modul Releu 5V](https://example.com/relay_module.png)
-
-_Figura 7: Modul releu 5V_
 
 **Schema de conectare:**
 
@@ -294,10 +262,6 @@ Afișajul LCD utilizat are 16 coloane și 2 rânduri, echipat cu un adaptor I2C 
 
 **Rol în proiect:** Afișarea stării sistemului, a comenzilor primite și a mesajelor pentru utilizator.
 
-![LCD 16x2 cu adaptor I2C](https://example.com/lcd_i2c.png)
-
-_Figura 9: LCD 16x2 cu adaptor I2C_
-
 **Schema de conectare:**
 
 ```
@@ -321,10 +285,6 @@ Tastatura matricială 4x4 oferă 16 butoane aranjate într-o matrice de 4 rându
 - Rezistență de contact: <100 Ohm
 
 **Rol în proiect:** Permite introducerea comenzilor direct, fără necesitatea unui calculator conectat.
-
-![Tastatură Matricială 4x4](https://example.com/keypad_4x4.png)
-
-_Figura 11: Tastatură matricială 4x4_
 
 **Schema de conectare:**
 
@@ -353,10 +313,6 @@ Pentru demonstrarea funcționalității, am utilizat un bec electric de joasă t
 
 **Rol în proiect:** Demonstrează acționarea binară controlată de releu.
 
-![Bec electric 12V](https://example.com/bulb_12v.png)
-
-_Figura 13: Bec electric 12V_
-
 ## Descrierea Modulelor Software
 
 ### 1. Modulul Principal (`main.cpp`)
@@ -372,35 +328,7 @@ Modulul principal coordonează interacțiunea între toate celelalte module și 
 
 **Diagrama de flux:**
 
-```
-+-------------------+
-| Inițializare      |
-| - LCD             |
-| - Keypad          |
-| - Releu           |
-| - Serial          |
-+--------+----------+
-         |
-         v
-+-------------------+
-| Buclă Infinită    |
-+--------+----------+
-         |
-         v
-+-------------------+     +-------------------+
-| Verificare Serial | --> | Procesare Comandă |
-+-------------------+     +-------------------+
-         |
-         v
-+-------------------+     +-------------------+
-| Verificare Keypad | --> | Procesare Comandă |
-+-------------------+     +-------------------+
-         |
-         v
-+-------------------+
-| Actualizare LCD   |
-+-------------------+
-```
+![Diagrama de flux pentru modulul principal](images/7.png)
 
 _Figura 14: Diagrama de flux pentru modulul principal_
 
@@ -707,33 +635,9 @@ _Figura 23: Citirea comenzilor de la interfața serială_
 
 ### Fotografii ale Prototipului
 
-![Prototip Complet](https://example.com/prototype_full.jpg)
+![Prototip Complet](images/8.png)
 
 _Figura 24: Prototipul complet asamblat_
-
-![Detaliu Conexiuni](https://example.com/connections_detail.jpg)
-
-_Figura 25: Detaliu conexiuni hardware_
-
-### Capturi de Ecran Terminal
-
-![Terminal Serial - Comanda ON](https://example.com/terminal_on.png)
-
-_Figura 26: Terminal serial - Comanda "relay on"_
-
-![Terminal Serial - Comanda OFF](https://example.com/terminal_off.png)
-
-_Figura 27: Terminal serial - Comanda "relay off"_
-
-### Afișaj LCD
-
-![LCD - Stare ON](https://example.com/lcd_on.jpg)
-
-_Figura 28: Afișaj LCD - Stare releu ON_
-
-![LCD - Stare OFF](https://example.com/lcd_off.jpg)
-
-_Figura 29: Afișaj LCD - Stare releu OFF_
 
 ### Teste Funcționale
 
